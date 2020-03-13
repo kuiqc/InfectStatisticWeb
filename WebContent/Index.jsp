@@ -23,7 +23,6 @@
               margin: 50px auto;
               border:1px solid #FFFFFF;
           }
-        /*默认长宽比0.75*/
     </style>
 </head>
 <body>
@@ -125,7 +124,7 @@
         };
         myChart.setOption(option);
         myChart.on('click', function (params) {
-        	window.location.href="province.jsp"+"?"+"province="+ params.name;
+        	window.location.href="province.jsp"+"?"+"province="+params.name;
         });
     </script>
 </body>
