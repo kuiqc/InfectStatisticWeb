@@ -23,6 +23,7 @@ public class File_handle {
     Date d = new Date(System.currentTimeMillis());//获取当前时间
     public String date_now = formatter.format(d); //转化格式
 
+
         //读取路径下的文件
         public void get_Flist() {
             File[] flist;
@@ -37,7 +38,7 @@ public class File_handle {
                 String alladdr = logaddr + fname;//完整文件路径
                 Read_txt(alladdr);
                 DBTool myTool=new DBTool();
-                myTool.exeSQL("insert into ip_number values('" + Date + "','" +
+                myTool.exeSQL("insert ignore into ip_number values('" + Date + "','" +
                         person[0][0] + "','" + person[1][0] + "','" + person[2][0] + "','" + person[3][0] + "','" + person[4][0] + "','" +
                         person[5][0] + "','" + person[6][0] + "','" + person[7][0] + "','" + person[8][0] + "','" + person[9][0] + "','" +
                         person[10][0] + "','" + person[11][0] + "','" + person[12][0] + "','" + person[13][0] + "','" + person[14][0] + "','" +
@@ -45,7 +46,7 @@ public class File_handle {
                         person[20][0] + "','" + person[21][0] + "','" + person[22][0] + "','" + person[23][0] + "','" + person[24][0] + "','" +
                         person[25][0] + "','" + person[26][0] + "','" + person[27][0] + "','" + person[28][0] + "','" + person[29][0] + "','" +
                         person[30][0] + "','" + person[31][0] + "','" + person[32][0] + "','" + person[33][0] + "','" + person[34][0] + "')");
-                myTool.exeSQL("insert into sp_number values('" + Date + "','" +
+                myTool.exeSQL("insert ignore into sp_number values('" + Date + "','" +
                         person[0][1] + "','" + person[1][1] + "','" + person[2][1] + "','" + person[3][1] + "','" + person[4][1] + "','" +
                         person[5][1] + "','" + person[6][1] + "','" + person[7][1] + "','" + person[8][1] + "','" + person[9][1] + "','" +
                         person[10][1] + "','" + person[11][1] + "','" + person[12][1] + "','" + person[13][1] + "','" + person[14][1] + "','" +
@@ -53,7 +54,7 @@ public class File_handle {
                         person[20][1] + "','" + person[21][1] + "','" + person[22][1] + "','" + person[23][1] + "','" + person[24][1] + "','" +
                         person[25][1] + "','" + person[26][1] + "','" + person[27][1] + "','" + person[28][1] + "','" + person[29][1] + "','" +
                         person[30][1] + "','" + person[31][1] + "','" + person[32][1] + "','" + person[33][1] + "','" + person[34][1] + "')");
-                myTool.exeSQL("insert into cure_number values('" + Date + "','" +
+                myTool.exeSQL("insert ignore into cure_number values('" + Date + "','" +
                         person[0][2] + "','" + person[1][2] + "','" + person[2][2] + "','" + person[3][2] + "','" + person[4][2] + "','" +
                         person[5][2] + "','" + person[6][2] + "','" + person[7][2] + "','" + person[8][2] + "','" + person[9][2] + "','" +
                         person[10][2] + "','" + person[11][2] + "','" + person[12][2] + "','" + person[13][2] + "','" + person[14][2] + "','" +
@@ -61,7 +62,7 @@ public class File_handle {
                         person[20][2] + "','" + person[21][2] + "','" + person[22][2] + "','" + person[23][2] + "','" + person[24][2] + "','" +
                         person[25][2] + "','" + person[26][2] + "','" + person[27][2] + "','" + person[28][2] + "','" + person[29][2] + "','" +
                         person[30][2] + "','" + person[31][2] + "','" + person[32][2] + "','" + person[33][2] + "','" + person[34][2] + "')");
-                myTool.exeSQL("insert into dead_number values('" + Date + "','" +
+                myTool.exeSQL("insert ignore into dead_number values('" + Date + "','" +
                         person[0][3] + "','" + person[1][3] + "','" + person[2][3] + "','" + person[3][3] + "','" + person[4][3] + "','" +
                         person[5][3] + "','" + person[6][3] + "','" + person[7][3] + "','" + person[8][3] + "','" + person[9][3] + "','" +
                         person[10][3] + "','" + person[11][3] + "','" + person[12][3] + "','" + person[13][3] + "','" + person[14][3] + "','" +
