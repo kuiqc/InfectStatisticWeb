@@ -20,27 +20,17 @@
 	        #main{
 	              width:800px;
 	              height:600px;
-	              margin: 50px auto;
+	              margin: 40px auto;
 	              border:1px solid #FFFFFF;
 	          }
 	    </style>
 	</head>
 	<%
-    //Createtype tp=new Createtype();
-    File_handle tt= new File_handle();
-    tt.get_Flist();
-    String date="2020-02-02";
-    String pro="quanguo";
-    /*
-    System.out.println(tt.ipnum(date,pro));
-    System.out.println(tt.spnum(date,pro));
-    System.out.println(tt.curenum(date,pro));
-    System.out.println(tt.deadnum(date,pro));
-    System.out.println(tt.iptd(date,pro).get(2));
-    System.out.println(tt.sptd(date,pro).get(2));
-    System.out.println(tt.curetd(date,pro).get(2));
-    System.out.println(tt.deadtd(date,pro).get(2));
-    */
+	    //Createtype tp=new Createtype();
+	    File_handle tt= new File_handle();
+	    tt.get_Flist();
+	    String date="2020-02-02";
+	    String pro="quanguo";
 	%>
 	<body>
 	    <div id="main">

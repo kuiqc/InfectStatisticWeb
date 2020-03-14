@@ -1,27 +1,30 @@
 <%@page import="infect.web.*"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>折线统计图</title>
+        <title>疫情统计图</title>
     </head>
     <body>
-        <!-- 折线统计图 -->
         <div class="row">
-			<div id="chart1" style="width: 900px;height: 600px; margin:80px auto; text-align:center"></div>
-            <div id="chart2" style="width: 900px;height: 600px; margin:80px auto; text-align:center"></div>
+			<div id="chart1" style="width: 900px;height: 600px; margin:40px auto; text-align:center"></div>
+            <div id="chart2" style="width: 900px;height: 600px; margin:40px auto; text-align:center"></div>
         </div>
     </body>
     <script src="echarts/echarts.min.js" type="text/javascript"></script>
     <script type="text/javascript">
     	<%
+    	
+			String date = "2020-02-02";
+    	
     		String provinceName = request.getParameter("province");
     		myProvince mypro = new myProvince();
     		String pro = mypro.getProvincePinyin(provinceName);
-    		String date = "2020-02-02";
     		File_handle tt= new File_handle();
+    		
 		%>
     	// 基于准备好的dom，初始化echarts实例
     	var myChart = echarts.init(document.getElementById("chart1"));
@@ -46,7 +49,7 @@
 	            name: '人数',
 	            type: 'bar',
 	   	        barWidth : 40,
-	   	        data: [<%=tt.ipnum(date,pro)%>,<%=tt.spnum(date,pro)%>,<%=tt.curenum(date,pro)%>,<%=tt.deadnum(date,pro)%>],
+	   	        data: [<%=tt.ipnum(date,pro)%>,<%=tt.spnum(date,pro)%>,<%=tt.curenum(date,pro)%>,<%=tt.deadnum(date,pro) %>],
 	            itemStyle: {
 	                normal: {
 	                    color: function(params) {
@@ -70,9 +73,55 @@
 	    myChart.setOption(option);
 	
 	</script>
+	
     <script type="text/javascript">
-		//var pro=<%=pro%>;
-		//alert(pro);
+    
+    	<%
+	    	myLogs myLogs = new myLogs();
+	    	ArrayList<String> files = myLogs.getLogsName(date);
+	    	
+	    	ArrayList<Integer> arrIp = tt.iptd(date,pro);
+	    	ArrayList<Integer> arrSp = tt.sptd(date,pro);
+	    	ArrayList<Integer> arrCure = tt.curetd(date,pro);
+	    	ArrayList<Integer> arrDead = tt.deadtd(date,pro);
+	    	
+    	%>
+    	
+    	//日期数组
+    	var arr = new Array();
+    	<% for(int i = 0;i<files.size();i++){ %>
+		var j = '<%=files.get(i)%>';
+		arr.push(j);
+		<% } %>
+		
+		//ip增长数组
+    	var arr1 = new Array();
+    	<% for(int i = 0;i<arrIp.size();i++){ %>
+    	j = '<%=arrIp.get(i)%>';
+		arr1.push(j);
+		<% } %>
+		
+		//sp增长数组
+    	var arr2 = new Array();
+    	<% for(int i = 0;i<arrSp.size();i++){ %>
+    	j = '<%=arrSp.get(i)%>';
+		arr2.push(j);
+		<% } %>
+		
+		//Cure增长数组
+    	var arr3 = new Array();
+    	<% for(int i = 0;i<arrCure.size();i++){ %>
+    	j = '<%=arrCure.get(i)%>';
+		arr3.push(j);
+		<% } %>
+		
+		//Dead增长数组
+    	var arr4 = new Array();
+    	<% for(int i = 0;i<arrDead.size();i++){ %>
+    	j = '<%=arrDead.get(i)%>';
+		arr4.push(j);
+		<% } %>
+    
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('chart2'));
         // 指定图表的配置项和数据
@@ -103,7 +152,12 @@
             xAxis: [{
                 type: 'category',
                 boundaryGap: false,
-                data: ['10.1', '10.2', '10.3', '10.4', '10.5', '10.6', '10.7']
+                data: arr,
+             	//x轴文字倾斜
+                axisLabel:{
+                	interval:0,
+                	rotate:25,
+                }
             }],
             yAxis: [{
                 type: 'value'
@@ -114,7 +168,7 @@
                     stack: '总量',
                     smooth:true,
                     color:"#FF6A57",
-                    data: [120, 132, 101, 134, 90, 230, 210]
+                    data: arr1,
                 },
                 {
                     name: '新增疑似趋势',
@@ -122,7 +176,7 @@
                     stack: '总量',
                     smooth:true,
                     color:"#E83132",
-                    data: [220, 182, 191, 234, 290, 330, 310]
+                    data: arr2,
                 },
                 {
                     name: '治愈趋势',
@@ -130,7 +184,7 @@
                     stack: '总量',
                     smooth:true,
                     color:"#10AEB5",
-                    data: [150, 232, 101, 154, 190, 330, 410]
+                    data: arr3,
                 },
                 {
                     name: '死亡趋势',
@@ -138,7 +192,7 @@
                     stack: '总量',
                     smooth:true,
                     color:"#4D5054",
-                    data: [320, 332, 301, 334, 190, 330, 320]
+                    data: arr4,
                 },
             ]
         });
