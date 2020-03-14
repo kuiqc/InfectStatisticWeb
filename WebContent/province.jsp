@@ -40,7 +40,7 @@
 	        series: [{
 	            name: '人数',
 	            type: 'bar',
-	   	        barWidth : 80,
+	   	        barWidth : 40,
 	   	        data: [5, 20, 36, 10],
 	            itemStyle: {
 	                normal: {
