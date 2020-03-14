@@ -11,10 +11,10 @@ public class Main {
         System.out.println(tt.spnum(s1,s2));
         System.out.println(tt.curenum(s1,s2));
         System.out.println(tt.deadnum(s1,s2));
-        //System.out.println(tt.iptd(s1,s2).get(2));
-        //System.out.println(tt.sptd(s1,s2).get(2));
-        //System.out.println(tt.curetd(s1,s2).get(2));
-        //System.out.println(tt.deadtd(s1,s2).get(2));
+        System.out.println(tt.iptd(s1,s2).get(1));
+        System.out.println(tt.sptd(s1,s2).get(1));
+        System.out.println(tt.curetd(s1,s2).get(1));
+        System.out.println(tt.deadtd(s1,s2).get(1));
 
     }
 }
