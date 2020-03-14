@@ -1,3 +1,4 @@
+<%@page import="infect.web.*"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -10,13 +11,17 @@
         <!-- 折线统计图 -->
         <div class="row">
 			<div id="chart1" style="width: 900px;height: 600px; margin:80px auto; text-align:center"></div>
-            <div id="chart2" style="width: 900px; height: 600px;  margin:80px auto; text-align:center"></div>
+            <div id="chart2" style="width: 900px;height: 600px; margin:80px auto; text-align:center"></div>
         </div>
     </body>
     <script src="echarts/echarts.min.js" type="text/javascript"></script>
     <script type="text/javascript">
     	<%
-    		String pro = request.getParameter("province");
+    		String provinceName = request.getParameter("province");
+    		myProvince mypro = new myProvince();
+    		String pro = mypro.getProvincePinyin(provinceName);
+    		String date = "2020-02-02";
+    		File_handle tt= new File_handle();
 		%>
     	// 基于准备好的dom，初始化echarts实例
     	var myChart = echarts.init(document.getElementById("chart1"));
@@ -24,7 +29,7 @@
     	var option = {
         	// 标题
         	title: {
-	        	text: '<%=pro%>'+'疫情情况柱状图',
+	        	text: '<%=provinceName%>'+'疫情情况柱状图',
 	            subtext:'数据不代表真实情况',
 	            left:'left',
 	        },
@@ -41,7 +46,7 @@
 	            name: '人数',
 	            type: 'bar',
 	   	        barWidth : 40,
-	   	        data: [5, 20, 36, 10],
+	   	        data: [<%=tt.ipnum(date,pro)%>,<%=tt.spnum(date,pro)%>,<%=tt.curenum(date,pro)%>,<%=tt.deadnum(date,pro)%>],
 	            itemStyle: {
 	                normal: {
 	                    color: function(params) {
@@ -73,7 +78,7 @@
         // 指定图表的配置项和数据
         myChart.setOption({
             title: {
-            	text: '<%=pro%>'+'疫情情况折线图',
+            	text: '<%=provinceName%>'+'疫情情况折线图',
                 subtext:'数据不代表真实情况',
                 left:'left',
             },
