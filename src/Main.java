@@ -6,7 +6,7 @@ public class Main {
         File_handle tt= new File_handle();
         tt.get_Flist();
         String s1="2020-02-02";
-        String s2="quanguo";
+        String s2="hAJHSA";
         System.out.println(tt.ipnum(s1,s2));
         System.out.println(tt.spnum(s1,s2));
         System.out.println(tt.curenum(s1,s2));
