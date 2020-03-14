@@ -5,7 +5,7 @@ public class Main {
         //Createtype tp=new Createtype();
         File_handle tt= new File_handle();
         tt.get_Flist();
-        String s1="2020-01-20";
+        String s1="2020-02-02";
         String s2="quanguo";
         System.out.println(tt.ipnum(s1,s2));
         System.out.println(tt.spnum(s1,s2));
