@@ -25,17 +25,32 @@
 	          }
 	    </style>
 	</head>
-	<%
-	    //Createtype tp=new Createtype();
-	    File_handle tt= new File_handle();
-	    tt.get_Flist();
-	    String date="2020-02-02";
-	    String pro="quanguo";
-	%>
 	<body>
 	    <div id="main">
 	    </div>
+	    <div class="row" style="margin:40px auto; text-align:center">
+    		<input type="text" name="time" id="time" placeholder="yyyy-mm-dd">
+    		<input type="button" value="查询" onclick="provinceDump()">
+    	</div>
 	    <script type="text/javascript">
+	    
+		<%
+		
+	    	myLogs myLogs = new myLogs();
+			String date = myLogs.getLatestDate();
+			
+		    //Createtype tp=new Createtype();
+		    File_handle tt= new File_handle();
+		    tt.get_Flist();
+		    String pro="quanguo";
+		    
+    		String inputDate = request.getParameter("date");
+    		if(inputDate!=null){
+    			date = inputDate;
+    		}
+		    
+		%>
+		
 	    var dataList=[
 	        {name:"安徽",value:<%=tt.ipnum(date,"anhui")%>},
 	        {name:"北京",value:<%=tt.ipnum(date,"beijing")%>},
@@ -126,9 +141,15 @@
 	            ]
 	        };
 	        myChart.setOption(option);
+	        var dateParam = '<%=date%>';
 	        myChart.on('click', function (params) {
-	        	window.location.href="province.jsp"+"?"+"province="+params.name;
+	        	window.location.href="province.jsp"+"?"+"province="+params.name+"&date="+dateParam;
 	        });
+	        
+	    	function provinceDump(){
+	    		var content = document.getElementById("time");
+	    		window.location.href = "Index.jsp"+"?"+"date="+content.value;
+	    	}
 	    </script>
 	</body>
 </html>

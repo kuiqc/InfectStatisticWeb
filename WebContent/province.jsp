@@ -13,14 +13,25 @@
 			<div id="chart1" style="width: 900px;height: 600px; margin:40px auto; text-align:center"></div>
             <div id="chart2" style="width: 900px;height: 600px; margin:40px auto; text-align:center"></div>
         </div>
+        <div class="row" style="margin:40px auto; text-align:center">
+    		<input type="text" name="time" id="time" placeholder="yyyy-mm-dd">
+    		<input type="button" value="查询" onclick="provinceDump()">
+    	</div>
     </body>
     <script src="echarts/echarts.min.js" type="text/javascript"></script>
     <script type="text/javascript">
+    
     	<%
-    	
-			String date = "2020-02-02";
-    	
+	    	myLogs myLogs = new myLogs();
+			String date = myLogs.getLatestDate();
+    		
     		String provinceName = request.getParameter("province");
+    		
+    		String inputDate = request.getParameter("date");
+    		if(inputDate!=null){
+    			date = inputDate;
+    		}
+    			
     		myProvince mypro = new myProvince();
     		String pro = mypro.getProvincePinyin(provinceName);
     		File_handle tt= new File_handle();
@@ -77,7 +88,6 @@
     <script type="text/javascript">
     
     	<%
-	    	myLogs myLogs = new myLogs();
 	    	ArrayList<String> files = myLogs.getLogsName(date);
 	    	
 	    	ArrayList<Integer> arrIp = tt.iptd(date,pro);
@@ -196,5 +206,10 @@
                 },
             ]
         });
+        var proDump = '<%=provinceName%>';
+    	function provinceDump(){
+    		var content = document.getElementById("time");
+    		window.location.href = "province.jsp"+"?"+"province="+proDump+"&date="+content.value;
+    	}
     </script>
 </html>
