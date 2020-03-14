@@ -33,7 +33,7 @@ public class File_handle {
             int i;
             for (i = 0; i < flist.length; i++) {
                 fname = flist[i].getName();//文件名
-                System.out.println(fname);//显示文件名
+                //System.out.println(fname);//显示文件名
                 String Date=fname.substring(0,10);
                 String alladdr = logaddr + fname;//完整文件路径
                 Read_txt(alladdr);
