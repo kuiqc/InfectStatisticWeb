@@ -39,7 +39,7 @@
 	    	myLogs myLogs = new myLogs();
 			String date = myLogs.getLatestDate();
 			
-		    //Createtype tp=new Createtype();
+		    Createtype tp=new Createtype();
 		    File_handle tt= new File_handle();
 		    tt.get_Flist();
 		    String pro="quanguo";

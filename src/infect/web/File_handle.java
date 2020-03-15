@@ -1,3 +1,5 @@
+package infect.web;
+
 import javax.swing.*;
 import java.io.*;
 import java.sql.ResultSet;
@@ -7,35 +9,34 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class File_handle {
-    //æ—¥å¿—åœ°å€
-    public String logaddr="C:\\Users\\61685\\IdeaProjects\\221701324\\log\\";
-    //çœä»½
-    public String[] province={"å…¨å›½","å®‰å¾½","åŒ—äº¬","é‡åº†","ç¦å»º","ç”˜è‚ƒ",
-            "å¹¿ä¸œ","å¹¿è¥¿","è´µå·","æµ·å—","æ²³åŒ—","æ²³å—","é»‘é¾™æ±Ÿ","æ¹–åŒ—",
-            "æ¹–å—","å‰æ—","æ±Ÿè‹","æ±Ÿè¥¿","è¾½å®","å†…è’™å¤","å®å¤","é’æµ·",
-            "å±±ä¸œ","å±±è¥¿","é™•è¥¿","ä¸Šæµ·","å››å·","å¤©æ´¥","è¥¿è—", "æ–°ç–†",
-            "äº‘å—","æµ™æ±Ÿ","æ¾³é—¨","é¦™æ¸¯","å°æ¹¾"};//å„çœåç§°
-    public int[][] person = new int[35][4];//å„çœå„ç±»äººç¾¤
+    //ÈÕÖ¾µØÖ·
+    public String logaddr="D:\\log\\";
+    //Ê¡·İ
+    public String[] province={"È«¹ú","°²»Õ","±±¾©","ÖØÇì","¸£½¨","¸ÊËà",
+            "¹ã¶«","¹ãÎ÷","¹óÖİ","º£ÄÏ","ºÓ±±","ºÓÄÏ","ºÚÁú½­","ºş±±",
+            "ºşÄÏ","¼ªÁÖ","½­ËÕ","½­Î÷","ÁÉÄş","ÄÚÃÉ¹Å","ÄşÏÄ","Çàº£",
+            "É½¶«","É½Î÷","ÉÂÎ÷","ÉÏº£","ËÄ´¨","Ìì½ò","Î÷²Ø", "ĞÂ½®",
+            "ÔÆÄÏ","Õã½­","°ÄÃÅ","Ïã¸Û","Ì¨Íå"};//¸÷Ê¡Ãû³Æ
+    public int[][] person = new int[35][4];//¸÷Ê¡¸÷ÀàÈËÈº
 
 
-    //è·å–å½“å‰æ—¶é—´
+    //»ñÈ¡µ±Ç°Ê±¼ä
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    Date d = new Date(System.currentTimeMillis());//è·å–å½“å‰æ—¶é—´
-    public String date_now = formatter.format(d); //è½¬åŒ–æ ¼å¼
+    Date d = new Date(System.currentTimeMillis());//»ñÈ¡µ±Ç°Ê±¼ä
+    public String date_now = formatter.format(d); //×ª»¯¸ñÊ½
 
-
-        //è¯»å–è·¯å¾„ä¸‹çš„æ–‡ä»¶
+        //¶ÁÈ¡Â·¾¶ÏÂµÄÎÄ¼ş
         public void get_Flist() {
             File[] flist;
             String fname;
-            File file = new File(logaddr);//è·å–æŒ‡å®šç›®å½•ä¸‹æ–‡ä»¶
+            File file = new File(logaddr);//»ñÈ¡Ö¸¶¨Ä¿Â¼ÏÂÎÄ¼ş
             flist = file.listFiles();
             int i;
             for (i = 0; i < flist.length; i++) {
-                fname = flist[i].getName();//æ–‡ä»¶å
-                //System.out.println(fname);//æ˜¾ç¤ºæ–‡ä»¶å
+                fname = flist[i].getName();//ÎÄ¼şÃû
+                //System.out.println(fname);//ÏÔÊ¾ÎÄ¼şÃû
                 String Date=fname.substring(0,10);
-                String alladdr = logaddr + fname;//å®Œæ•´æ–‡ä»¶è·¯å¾„
+                String alladdr = logaddr + fname;//ÍêÕûÎÄ¼şÂ·¾¶
                 Read_txt(alladdr);
                 DBTool myTool=new DBTool();
                 myTool.exeSQL("insert ignore into ip_number values('" + Date + "','" +
@@ -76,16 +77,16 @@ public class File_handle {
             }
         }
 
-        //è¯»å–æ–‡æœ¬å†…å®¹
+        //¶ÁÈ¡ÎÄ±¾ÄÚÈİ
         public void Read_txt(String address) {
             try {
                 BufferedReader bf;
                 bf = new BufferedReader(new InputStreamReader(
                         new FileInputStream(new File(address)), "UTF-8"));
                 String rLine = null;
-                /*éš”è¡Œè¯»å–äº†
+                /*¸ôĞĞ¶ÁÈ¡ÁË
                 while(br.readLine()!=null){
-                    rLine=br.readLine();//æŒ‰è¡Œè¯»å–
+                    rLine=br.readLine();//°´ĞĞ¶ÁÈ¡
                     //if (!rLine.startsWith("//")){
                         System.out.println(rLine);
                     //}
@@ -94,7 +95,7 @@ public class File_handle {
                 while ((rLine = bf.readLine()) != null) {
                     if (!rLine.startsWith("//")) {
                         /*
-                        æ£€æµ‹æ–‡æ¡£è¯»å–æ˜¯å¦æ­£ç¡®
+                        ¼ì²âÎÄµµ¶ÁÈ¡ÊÇ·ñÕıÈ·
                         System.out.println(rLine);
                         */
                         Deal_txt(rLine);
@@ -106,29 +107,29 @@ public class File_handle {
             }
         }
 
-        //å¤„ç†æ–‡æœ¬
+        //´¦ÀíÎÄ±¾
         public void Deal_txt(String line) {
-            String[] str = {"(\\S+) æ–°å¢ æ„ŸæŸ“æ‚£è€… (\\d+)äºº", "(\\S+) æ–°å¢ ç–‘ä¼¼æ‚£è€… (\\d+)äºº",
-                    "(\\S+) æ„ŸæŸ“æ‚£è€… æµå…¥ (\\S+) (\\d+)äºº", "(\\S+) ç–‘ä¼¼æ‚£è€… æµå…¥ (\\S+) (\\d+)äºº",
-                    "(\\S+) æ­»äº¡ (\\d+)äºº", "(\\S+) æ²»æ„ˆ (\\d+)äºº",
-                    "(\\S+) ç–‘ä¼¼æ‚£è€… ç¡®è¯Šæ„ŸæŸ“ (\\d+)äºº", "(\\S+) æ’é™¤ ç–‘ä¼¼æ‚£è€… (\\d+)äºº"
-            };//æ—¥å¿—å¯èƒ½å‡ºç°çš„æƒ…å†µ
-            int num[] = new int[8];//å„ç§äººæ•°
-            String[] txt_str = line.split(" ");//ç”¨ç©ºæ ¼éš”å¼€
+            String[] str = {"(\\S+) ĞÂÔö ¸ĞÈ¾»¼Õß (\\d+)ÈË", "(\\S+) ĞÂÔö ÒÉËÆ»¼Õß (\\d+)ÈË",
+                    "(\\S+) ¸ĞÈ¾»¼Õß Á÷Èë (\\S+) (\\d+)ÈË", "(\\S+) ÒÉËÆ»¼Õß Á÷Èë (\\S+) (\\d+)ÈË",
+                    "(\\S+) ËÀÍö (\\d+)ÈË", "(\\S+) ÖÎÓú (\\d+)ÈË",
+                    "(\\S+) ÒÉËÆ»¼Õß È·Õï¸ĞÈ¾ (\\d+)ÈË", "(\\S+) ÅÅ³ı ÒÉËÆ»¼Õß (\\d+)ÈË"
+            };//ÈÕÖ¾¿ÉÄÜ³öÏÖµÄÇé¿ö
+            int num[] = new int[8];//¸÷ÖÖÈËÊı
+            String[] txt_str = line.split(" ");//ÓÃ¿Õ¸ñ¸ô¿ª
 
-            if (line.matches(str[0])) {//æ–°å¢æ„ŸæŸ“è€…
-                txt_str[3] = txt_str[3].replace("äºº", "");
-                num[0] = Integer.valueOf(txt_str[3]);//æŠŠäººæ•°è½¬åŒ–ä¸ºintç±»å‹
+            if (line.matches(str[0])) {//ĞÂÔö¸ĞÈ¾Õß
+                txt_str[3] = txt_str[3].replace("ÈË", "");
+                num[0] = Integer.valueOf(txt_str[3]);//°ÑÈËÊı×ª»¯ÎªintÀàĞÍ
                 for (int i = 0; i < province.length; i++) {
                     if (txt_str[0].equals(province[i])) {
-                        //System.out.println(province[i]);ç”¨æ¥æ£€éªŒè¾“å‡º
+                        //System.out.println(province[i]);ÓÃÀ´¼ìÑéÊä³ö
                         person[i][0] += num[0];
                         person[0][0] += num[0];
                         break;
                     }
                 }
-            } else if (line.matches(str[1])) {//æ–°å¢ç–‘ä¼¼
-                txt_str[3] = txt_str[3].replace("äºº", "");
+            } else if (line.matches(str[1])) {//ĞÂÔöÒÉËÆ
+                txt_str[3] = txt_str[3].replace("ÈË", "");
                 num[1] = Integer.valueOf(txt_str[3]);
                 for (int i = 0; i < province.length; i++) {
                     if (txt_str[0].equals(province[i])) {
@@ -137,88 +138,88 @@ public class File_handle {
                         break;
                     }
                 }
-            } else if (line.matches(str[2])) {//æ„ŸæŸ“æµå…¥
-                txt_str[4] = txt_str[4].replace("äºº", "");
+            } else if (line.matches(str[2])) {//¸ĞÈ¾Á÷Èë
+                txt_str[4] = txt_str[4].replace("ÈË", "");
                 num[2] = Integer.valueOf(txt_str[4]);
                 for (int j = 0; j < province.length; j++) {
-                    if (txt_str[0].equals(province[j])) {//æµå‡ºçœ
+                    if (txt_str[0].equals(province[j])) {//Á÷³öÊ¡
                         person[j][0] -= num[2];
                         break;
                     }
                 }
                 for (int i = 0; i < province.length; i++) {
-                    if (txt_str[3].equals(province[i])) {//æµå…¥çœ
+                    if (txt_str[3].equals(province[i])) {//Á÷ÈëÊ¡
                         person[i][0] += num[2];
                         break;
                     }
                 }
 
-            } else if (line.matches(str[3])) {//ç–‘ä¼¼æµå…¥
-                txt_str[4] = txt_str[4].replace("äºº", "");
+            } else if (line.matches(str[3])) {//ÒÉËÆÁ÷Èë
+                txt_str[4] = txt_str[4].replace("ÈË", "");
                 num[3] = Integer.valueOf(txt_str[4]);
-                for (int j = 0; j < province.length; j++) {//æµå‡ºçœ
+                for (int j = 0; j < province.length; j++) {//Á÷³öÊ¡
                     if (txt_str[0].equals(province[j])) {
                         person[j][1] -= num[3];
                         break;
                     }
                 }
-                for (int i = 0; i < province.length; i++) {//æµå…¥çœ
+                for (int i = 0; i < province.length; i++) {//Á÷ÈëÊ¡
                     if (txt_str[3].equals(province[i])) {
                         person[i][1] += num[3];
                         break;
                     }
                 }
 
-            } else if (line.matches(str[4])) {//æ­»äº¡äººæ•°
-                txt_str[2] = txt_str[2].replace("äºº", "");
+            } else if (line.matches(str[4])) {//ËÀÍöÈËÊı
+                txt_str[2] = txt_str[2].replace("ÈË", "");
                 num[4] = Integer.valueOf(txt_str[2]);
                 for (int i = 0; i < province.length; i++) {
                     if (txt_str[0].equals(province[i])) {
-                        person[i][3] += num[4];//è¯¥çœæ­»äº¡äººæ•°å¢åŠ 
-                        person[0][3] += num[4];//å…¨å›½æ­»äº¡äººæ•°å¢åŠ 
-                        person[i][0] -= num[4];//è¯¥çœæ„ŸæŸ“äººæ•°å‡å°‘
-                        person[0][0] -= num[4];//å…¨å›½æ„ŸæŸ“äººæ•°å‡å°‘
+                        person[i][3] += num[4];//¸ÃÊ¡ËÀÍöÈËÊıÔö¼Ó
+                        person[0][3] += num[4];//È«¹úËÀÍöÈËÊıÔö¼Ó
+                        person[i][0] -= num[4];//¸ÃÊ¡¸ĞÈ¾ÈËÊı¼õÉÙ
+                        person[0][0] -= num[4];//È«¹ú¸ĞÈ¾ÈËÊı¼õÉÙ
                         break;
                     }
                 }
-            } else if (line.matches(str[5])) {//æ²»æ„ˆäººæ•°
-                txt_str[2] = txt_str[2].replace("äºº", "");
+            } else if (line.matches(str[5])) {//ÖÎÓúÈËÊı
+                txt_str[2] = txt_str[2].replace("ÈË", "");
                 num[5] = Integer.valueOf(txt_str[2]);
                 for (int i = 0; i < province.length; i++) {
                     if (txt_str[0].equals(province[i])) {
-                        person[i][2] += num[5];//è¯¥çœæ²»æ„ˆäººæ•°å¢åŠ 
-                        person[0][2] += num[5];//å…¨å›½æ²»æ„ˆäººæ•°å¢åŠ 
-                        person[i][0] -= num[5];//è¯¥çœæ„ŸæŸ“äººæ•°å‡å°‘
-                        person[0][0] -= num[5];//å…¨å›½æ„ŸæŸ“äººæ•°å‡å°‘
+                        person[i][2] += num[5];//¸ÃÊ¡ÖÎÓúÈËÊıÔö¼Ó
+                        person[0][2] += num[5];//È«¹úÖÎÓúÈËÊıÔö¼Ó
+                        person[i][0] -= num[5];//¸ÃÊ¡¸ĞÈ¾ÈËÊı¼õÉÙ
+                        person[0][0] -= num[5];//È«¹ú¸ĞÈ¾ÈËÊı¼õÉÙ
                         break;
                     }
                 }
-            } else if (line.matches(str[6])) {//ç–‘ä¼¼ç¡®è¯Šæ„ŸæŸ“
-                txt_str[3] = txt_str[3].replace("äºº", "");
+            } else if (line.matches(str[6])) {//ÒÉËÆÈ·Õï¸ĞÈ¾
+                txt_str[3] = txt_str[3].replace("ÈË", "");
                 num[6] = Integer.valueOf(txt_str[3]);
                 for (int i = 0; i < province.length; i++) {
                     if (txt_str[0].equals(province[i])) {
-                        person[i][0] += num[6];//è¯¥çœæ„ŸæŸ“äººæ•°å¢åŠ 
-                        person[0][0] += num[6];//å…¨å›½æ„ŸæŸ“äººæ•°å¢åŠ 
-                        person[i][1] -= num[6];//è¯¥çœç–‘ä¼¼äººæ•°å‡å°‘
-                        person[0][1] -= num[6];//å…¨å›½ç–‘ä¼¼äººæ•°å‡å°‘
+                        person[i][0] += num[6];//¸ÃÊ¡¸ĞÈ¾ÈËÊıÔö¼Ó
+                        person[0][0] += num[6];//È«¹ú¸ĞÈ¾ÈËÊıÔö¼Ó
+                        person[i][1] -= num[6];//¸ÃÊ¡ÒÉËÆÈËÊı¼õÉÙ
+                        person[0][1] -= num[6];//È«¹úÒÉËÆÈËÊı¼õÉÙ
                         break;
                     }
                 }
-            } else if (line.matches(str[7])) {//æ’é™¤ç–‘ä¼¼è€…
-                txt_str[3] = txt_str[3].replace("äºº", "");
+            } else if (line.matches(str[7])) {//ÅÅ³ıÒÉËÆÕß
+                txt_str[3] = txt_str[3].replace("ÈË", "");
                 num[7] = Integer.valueOf(txt_str[3]);
                 for (int i = 0; i < province.length; i++) {
                     if (txt_str[0].equals(province[i])) {
-                        person[i][1] -= num[7];//è¯¥çœç–‘ä¼¼äººæ•°å‡å°‘
-                        person[0][1] -= num[7];//å…¨å›½ç–‘ä¼¼äººæ•°å‡å°‘
+                        person[i][1] -= num[7];//¸ÃÊ¡ÒÉËÆÈËÊı¼õÉÙ
+                        person[0][1] -= num[7];//È«¹úÒÉËÆÈËÊı¼õÉÙ
                         break;
                     }
                 }
             }
         }
 
-        //ipäººæ•°
+        //ipÈËÊı
         public int ipnum(String date,String prv){
             int num=0;
             DBTool myTool=new DBTool();
@@ -232,7 +233,7 @@ public class File_handle {
                 ResultSet r = s.executeQuery(ipn);
                 r.beforeFirst();
                 if(!r.next())
-                    System.out.println("æŸ¥æ— æ­¤è®°å½•!");
+                    System.out.println("²éÎŞ´Ë¼ÇÂ¼!");
                 else{
                     num=Integer.parseInt(r.getString(prv));
                 }
@@ -246,7 +247,7 @@ public class File_handle {
 
         }
 
-        //späººæ•°
+        //spÈËÊı
         public int spnum(String date,String prv){
             int num=0;
             DBTool myTool=new DBTool();
@@ -260,7 +261,7 @@ public class File_handle {
                 ResultSet r = s.executeQuery(spn);
                 r.beforeFirst();
                 if(!r.next())
-                    System.out.println("æŸ¥æ— æ­¤è®°å½•!");
+                    System.out.println("²éÎŞ´Ë¼ÇÂ¼!");
                 else{
                     num=Integer.parseInt(r.getString(prv));
                 }
@@ -274,7 +275,7 @@ public class File_handle {
 
         }
 
-        //cureäººæ•°
+        //cureÈËÊı
         public int curenum(String date,String prv){
             int num=0;
             DBTool myTool=new DBTool();
@@ -288,7 +289,7 @@ public class File_handle {
                 ResultSet r = s.executeQuery(curen);
                 r.beforeFirst();
                 if(!r.next())
-                    System.out.println("æŸ¥æ— æ­¤è®°å½•!");
+                    System.out.println("²éÎŞ´Ë¼ÇÂ¼!");
                 else{
                     num=Integer.parseInt(r.getString(prv));
                 }
@@ -302,7 +303,7 @@ public class File_handle {
 
         }
 
-        //deadäººæ•°
+        //deadÈËÊı
         public int deadnum(String date,String prv){
             int num=0;
             DBTool myTool=new DBTool();
@@ -316,7 +317,7 @@ public class File_handle {
                 ResultSet r = s.executeQuery(deadn);
                 r.beforeFirst();
                 if(!r.next())
-                    System.out.println("æŸ¥æ— æ­¤è®°å½•!");
+                    System.out.println("²éÎŞ´Ë¼ÇÂ¼!");
                 else{
                     num=Integer.parseInt(r.getString(prv));
                 }
@@ -330,13 +331,13 @@ public class File_handle {
 
         }
 
-        //åˆ°ç›®å‰ä¸ºæ­¢æ–°å¢ipäººæ•°æ•°ç»„
+        //µ½Ä¿Ç°ÎªÖ¹ĞÂÔöipÈËÊıÊı×é
         public ArrayList<Integer> iptd(String date,String prv) {
             ArrayList<Integer> arr=new ArrayList<Integer>();
             DBTool myTool=new DBTool();
-            int num1=0;//æœ€å¼€å§‹ä¸€å¤©ä¸º0/å‰ä¸€å¤©
-            int num2=0;//å½“å¤©
-            int n;//å·®
+            int num1=0;//×î¿ªÊ¼Ò»ÌìÎª0/Ç°Ò»Ìì
+            int num2=0;//µ±Ìì
+            int n;//²î
             try
             {
                 Statement s = myTool.c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -356,7 +357,7 @@ public class File_handle {
                         num2=Integer.parseInt(rr.getString(prv));
                         n=num2-num1;
                         arr.add(n);
-                        num1=num2;//å½“å¤©å˜å‰å¤©
+                        num1=num2;//µ±Ìì±äÇ°Ìì
                     }
                 }
                 r.close();
@@ -369,13 +370,13 @@ public class File_handle {
 
         }
 
-    //åˆ°ç›®å‰ä¸ºæ­¢æ–°å¢späººæ•°æ•°ç»„
+    //µ½Ä¿Ç°ÎªÖ¹ĞÂÔöspÈËÊıÊı×é
     public ArrayList<Integer> sptd(String date,String prv) {
         ArrayList<Integer> arr=new ArrayList<Integer>();
         DBTool myTool=new DBTool();
-        int num1=0;//æœ€å¼€å§‹ä¸€å¤©ä¸º0/å‰ä¸€å¤©
-        int num2=0;//å½“å¤©
-        int n;//å·®
+        int num1=0;//×î¿ªÊ¼Ò»ÌìÎª0/Ç°Ò»Ìì
+        int num2=0;//µ±Ìì
+        int n;//²î
         try
         {
             Statement s = myTool.c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -395,7 +396,7 @@ public class File_handle {
                     num2=Integer.parseInt(rr.getString(prv));
                     n=num2-num1;
                     arr.add(n);
-                    num1=num2;//å½“å¤©å˜å‰å¤©
+                    num1=num2;//µ±Ìì±äÇ°Ìì
                 }
             }
             r.close();
@@ -408,11 +409,11 @@ public class File_handle {
 
     }
 
-    //åˆ°ç›®å‰ä¸ºæ­¢çš„cureäººæ•°æ•°ç»„
+    //µ½Ä¿Ç°ÎªÖ¹µÄcureÈËÊıÊı×é
     public ArrayList<Integer> curetd(String date,String prv) {
         ArrayList<Integer> arr=new ArrayList<Integer>();
         DBTool myTool=new DBTool();
-        int n;//äººæ•°
+        int n;//ÈËÊı
         try
         {
             Statement s = myTool.c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -443,11 +444,11 @@ public class File_handle {
 
     }
 
-    //åˆ°ç›®å‰ä¸ºæ­¢çš„deadäººæ•°æ•°ç»„
+    //µ½Ä¿Ç°ÎªÖ¹µÄdeadÈËÊıÊı×é
     public ArrayList<Integer> deadtd(String date,String prv) {
         ArrayList<Integer> arr=new ArrayList<Integer>();
         DBTool myTool=new DBTool();
-        int n;//äººæ•°
+        int n;//ÈËÊı
         try
         {
             Statement s = myTool.c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,

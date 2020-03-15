@@ -1,3 +1,5 @@
+package infect.web;
+
 import java.sql.*;
 
 public class DBTool {
@@ -8,7 +10,7 @@ public class DBTool {
     public  DBTool() {
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            // 閫氳繃鏁版嵁婧愪笌鏁版嵁搴撳缓绔嬭捣杩炴帴
+            // 通过数据源与数据库建立起连接
             c  =DriverManager.getConnection(url,user,password);
             if(isExistDatabase("db_yq"))
                 exeSQL("use db_yq");
@@ -26,7 +28,7 @@ public class DBTool {
         try{
             if(c==null)
                 return false;
-            Statement s=c.createStatement( ); // 鍒涘缓SQL璇彞瀵硅薄
+            Statement s=c.createStatement( ); // 创建SQL语句对象
             s.executeUpdate(sql);
             s.close();
             return true;
@@ -39,7 +41,7 @@ public class DBTool {
     public boolean isExistDatabase(String database) {
         Connection conn = null;
         Statement stmt = null;
-        ResultSet rs = null;// 鏁版嵁搴撶粨鏋滈泦
+        ResultSet rs = null;// 数据库结果集
         try {
             conn = DriverManager.getConnection(url,user,password);
             stmt = conn.createStatement();

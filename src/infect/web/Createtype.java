@@ -1,7 +1,9 @@
+package infect.web;
+
 public class Createtype {
     private DBTool myTool=new DBTool();
     public Createtype(){
-        //æ„ŸæŸ“è¡¨
+        //¸ÐÈ¾±í
         myTool.exeSQL(
                 "create table `ip_number`" +
                         "(`Date` varchar(32) default NULL," +
@@ -41,7 +43,7 @@ public class Createtype {
                         "`xianggang`  int(3) default NULL,"+
                         "`taiwan`  int(3) default NULL,"+
                         "PRIMARY KEY  (`Date`))");
-        //ç–‘ä¼¼è¡¨
+        //ÒÉËÆ±í
         myTool.exeSQL(
                 "create table `sp_number`" +
                         "(`Date` varchar(32) default NULL," +
@@ -81,7 +83,7 @@ public class Createtype {
                         "`xianggang`  int(3) default NULL,"+
                         "`taiwan`  int(3) default NULL,"+
                         "PRIMARY KEY  (`Date`))");
-        //æ²»æ„ˆè¡¨
+        //ÖÎÓú±í
         myTool.exeSQL(
                 "create table `cure_number`" +
                         "(`Date` varchar(32) default NULL," +
@@ -121,7 +123,7 @@ public class Createtype {
                         "`xianggang`  int(3) default NULL,"+
                         "`taiwan`  int(3) default NULL,"+
                         "PRIMARY KEY  (`Date`))");
-        //æ­»äº¡è¡¨
+        //ËÀÍö±í
         myTool.exeSQL(
                 "create table `dead_number`" +
                         "(`Date` varchar(32) default NULL," +
@@ -161,7 +163,5 @@ public class Createtype {
                         "`xianggang`  int(3) default NULL,"+
                         "`taiwan`  int(3) default NULL,"+
                         "PRIMARY KEY  (`Date`))");
-
-
     }
 }
